@@ -163,6 +163,7 @@ class RelationsHandler:
             user_id,
             events,
             is_peeking=(member_event_id is None),
+            msc4115_membership_on_events=self.hs.config.experimental.msc4115_membership_on_events,
         )
 
         # The relations returned for the requested event do include their
@@ -608,6 +609,7 @@ class RelationsHandler:
             user_id,
             events,
             is_peeking=(member_event_id is None),
+            msc4115_membership_on_events=self.hs.config.experimental.msc4115_membership_on_events,
         )
 
         aggregations = await self.get_bundled_aggregations(

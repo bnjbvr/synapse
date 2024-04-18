@@ -189,7 +189,11 @@ class EventHandler:
         is_peeking = not is_user_in_room
 
         filtered = await filter_events_for_client(
-            self._storage_controllers, user.to_string(), [event], is_peeking=is_peeking
+            self._storage_controllers,
+            user.to_string(),
+            [event],
+            is_peeking=is_peeking,
+            msc4115_membership_on_events=self.hs.config.experimental.msc4115_membership_on_events,
         )
 
         if not filtered:

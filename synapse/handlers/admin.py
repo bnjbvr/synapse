@@ -217,7 +217,10 @@ class AdminHandler:
                 )
 
                 events = await filter_events_for_client(
-                    self._storage_controllers, user_id, events
+                    self._storage_controllers,
+                    user_id,
+                    events,
+                    msc4115_membership_on_events=self.hs.config.experimental.msc4115_membership_on_events,
                 )
 
                 writer.write_events(room_id, events)
