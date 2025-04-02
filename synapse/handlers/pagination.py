@@ -418,6 +418,7 @@ class PaginationHandler:
         as_client_event: bool = True,
         event_filter: Optional[Filter] = None,
         use_admin_priviledge: bool = False,
+        dont_backfill: bool = False,
     ) -> JsonDict:
         """Get messages in a room.
 
@@ -576,7 +577,7 @@ class PaginationHandler:
                 found_big_gap
                 or missing_too_many_events
                 or not_enough_events_to_fill_response
-            ):
+            ) and not dont_backfill:
                 did_backfill = await self.hs.get_federation_handler().maybe_backfill(
                     room_id,
                     curr_topo,

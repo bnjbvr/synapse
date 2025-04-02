@@ -797,6 +797,7 @@ class RoomMessageListRestServlet(RestServlet):
 
         filter_json = parse_json(request, "filter", encoding="utf-8")
         event_filter = Filter(self._hs, filter_json) if filter_json else None
+        is_interactive = parse_boolean(request, "interactive", default=False)
 
         as_client_event = b"raw" not in request.args
         if (
@@ -811,6 +812,7 @@ class RoomMessageListRestServlet(RestServlet):
             pagin_config=pagination_config,
             as_client_event=as_client_event,
             event_filter=event_filter,
+            dont_backfill=is_interactive,
         )
 
         processing_end_time = self.clock.time_msec()
